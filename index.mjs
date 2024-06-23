@@ -17,6 +17,8 @@ const credentials = {
   port: process.env.PG_PORT,
 };
 
+console.log(credentials)
+
 // Creating a new Express application
 const app = express();
 const port = 9000;
