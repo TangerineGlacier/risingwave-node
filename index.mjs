@@ -7,14 +7,18 @@ dotenv.config();
 
 // Destructure Pool from the default import
 const { Pool } = pkg;
-
+const PG_USER = "root"
+const PG_PASSWORD = ""
+const PG_DATABASE = "dev"
+const PG_PORT = "80"
+const PG_HOST = "risingwave-psql.dp-1-438.svc.cluster.local"
 // Database credentials from environment variables
 const credentials = {
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
+  user: process.env.PG_USER || 'root',
+  host: process.env.PG_HOST || 'risingwave-psql.dp-1-438.svc.cluster.local',
+  database: process.env.PG_DATABASE || 'dev',
+  password: process.env.PG_PASSWORD || '',
+  port: process.env.PG_PORT || '80',
 };
 
 console.log(credentials)
