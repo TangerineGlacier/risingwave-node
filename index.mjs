@@ -31,7 +31,7 @@ const port = 9000;
 app.get('/test-db', async (req, res) => {
   const pool = new Pool(credentials);
   try {
-    const result = await pool.query("select * from source limit 1");
+    const result = await pool.query("select * from policy limit 1");
     res.json(result.rows);
   } catch (error) {
     console.error(error);
