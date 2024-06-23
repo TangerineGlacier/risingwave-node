@@ -44,7 +44,7 @@ app.get('/test-db', async (req, res) => {
 //  Query a materialised view
 app.post('/query', async (req, res) => {
   const pool = new Pool(credentials);
-  const query = req && req.body;
+  const query = req.body.query;
   console.log(query)
   try {
     const result = await pool.query(query);
@@ -60,7 +60,8 @@ app.post('/query', async (req, res) => {
 // Create a materialised view
 app.post('/create', async (req, res) => {
   const pool = new Pool(credentials);
-  const query = req && req.body;
+  const query = req.body.query;
+
   console.log(query)
   try {
     const result = await pool.query(query);
