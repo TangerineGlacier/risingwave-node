@@ -26,12 +26,44 @@ console.log(credentials)
 // Creating a new Express application
 const app = express();
 const port = 9000;
-
+app.use(express.json());
 // Route to test database connection
 app.get('/test-db', async (req, res) => {
   const pool = new Pool(credentials);
   try {
     const result = await pool.query("select * from policy limit 1");
+    res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  } finally {
+    await pool.end();
+  }
+});
+
+//  Query a materialised view
+app.post('/query', async (req, res) => {
+  const pool = new Pool(credentials);
+  const query = req && req.body;
+  console.log(query)
+  try {
+    const result = await pool.query(query);
+    res.json(result.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  } finally {
+    await pool.end();
+  }
+});
+
+// Create a materialised view
+app.post('/create', async (req, res) => {
+  const pool = new Pool(credentials);
+  const query = req && req.body;
+  console.log(query)
+  try {
+    const result = await pool.query(query);
     res.json(result.rows);
   } catch (error) {
     console.error(error);
@@ -50,3 +82,4 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
+
