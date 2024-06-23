@@ -5,6 +5,7 @@ node_modules/
 .npm/
 
 .env
+
 # Optional eslint cache
 .eslintcache
 
